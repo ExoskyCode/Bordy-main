@@ -14,7 +14,6 @@ model Board {
   id        Int      @id @default(autoincrement())
   title     String
   createdAt DateTime @default(now())
-
   proposition Proposition[]
 }
 
@@ -23,11 +22,9 @@ model Proposition {
   title     String
   createdAt DateTime @default(now())
   ip        String
-
   board   Board  @relation(fields: [boardId], references: [id])
   boardId Int
   vote    Vote[]
-
   @@unique([boardId, title])
 }
 
@@ -35,9 +32,7 @@ model Vote {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   ip        String
-
   proposition   Proposition @relation(fields: [propositionId], references: [id])
   propositionId Int
-
   @@unique([propositionId, ip])
 }
