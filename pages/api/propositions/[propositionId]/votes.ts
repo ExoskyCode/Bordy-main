@@ -8,7 +8,7 @@ type Data = {
 };
 
 const QueryScheme = z.object({
-	propositionId: z.string().transform((id) => Number(id)),
+	propositionId: z.string(),
 });
 
 export default async function handler(
@@ -26,12 +26,12 @@ export default async function handler(
 		const vote = await prisma.vote.create({
 			data: {
 				ip: String(Math.random()),
-				propositionId: query.propositionId,
+				propositionId: Number(query.propositionId),
 			},
 		});
 		res.status(201).json({ vote });
 	} catch (err) {
 		console.log({ err });
-		console.log(req.body);
+		console.log(typeof req.body);
 	}
 }

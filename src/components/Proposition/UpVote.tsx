@@ -14,11 +14,16 @@ const onError = () => toast.error('You can only vote once');
 export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
 	const router = useRouter();
 
+	const propositionIdProvide = String(propositionId);
 	const handleClick = () => {
 		fetch(`/api/propositions/${propositionId}/votes`, {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
 			body: JSON.stringify({
-				propositionId,
+				propositionId: propositionIdProvide,
 			}),
 		})
 			.then((res) => {
