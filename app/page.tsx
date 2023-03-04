@@ -1,5 +1,6 @@
 import { BoardCard } from '~/src/components/Board/BoardCard';
 import { Button } from '~/src/components/Board/CreateBoard/CreateBoardBtn';
+import { CreateBoardForm } from '~/src/components/Board/CreateBoard/CreateBoardForm';
 import { prisma } from '~/src/db/prisma';
 
 export default async function Home() {
@@ -7,10 +8,8 @@ export default async function Home() {
 	return (
 		<div className='flex flex-col gap-8'>
 			<h1 className='text-4xl font-bold'>Boards List</h1>
-
-			<Button as='a' href='/boards/new' className='self-start'>
-				Create new Board
-			</Button>
+			
+			<CreateBoardForm />
 
 			<ul className='flex flex-col gap-4'>
 				{boards.map((board) => (

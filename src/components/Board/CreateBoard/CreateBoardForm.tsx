@@ -3,8 +3,12 @@
 import { FormEvent } from 'react';
 import { Input } from './CreateBoardInput';
 import { Button } from '~/src/components/Board/CreateBoard/CreateBoardBtn';
+import { useRouter } from 'next/navigation';
 
 export const CreateBoardForm = () => {
+
+	const router = useRouter()
+	
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
@@ -19,7 +23,7 @@ export const CreateBoardForm = () => {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+			router.refresh()
     })
 	};
 
