@@ -17,6 +17,9 @@ export const UpVote = ({ voteCount, propositionId }: UpVoteProps) => {
 	const handleClick = () => {
 		fetch(`/api/propositions/${propositionId}/votes`, {
 			method: 'POST',
+			body: JSON.stringify({
+				propositionId,
+			}),
 		})
 			.then((res) => {
 				if (res.status === 201) {

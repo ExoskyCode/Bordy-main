@@ -15,18 +15,23 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	if (req.method !== 'POST') {
-		res.status(405).end();
-		return;
+	try {
+		if (req.method !== 'POST') {
+			res.status(405).end();
+			return;
+		}
+
+		const query = QueryScheme.parse(req.body);
+
+		const vote = await prisma.vote.create({
+			data: {
+				ip: String(Math.random()),
+				propositionId: query.propositionId,
+			},
+		});
+		res.status(201).json({ vote });
+	} catch (err) {
+		console.log({ err });
+		console.log(req.body);
 	}
-
-	const query = QueryScheme.parse(req.body);
-
-	const vote = await prisma.vote.create({
-		data: {
-			ip: String(Math.random()),
-			propositionId: query.propositionId,
-		},
-	});
-	res.status(201).json({ vote });
 }
