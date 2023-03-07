@@ -1,10 +1,10 @@
-import { Board } from '@prisma/client';
+import { Post } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from "next"
 import { z } from 'zod'
 import { prisma } from '~/src/db/prisma';
 
 type Data = {
-  board: Board
+  Post: Post
 }
 
 const BodyScheme = z.object({
@@ -25,5 +25,4 @@ export default async function handler(
       title: body.title
     }
   })
-  res.status(201).json({ board })
-}
+  res.status(201).json({ Post })
